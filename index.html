@@ -461,8 +461,8 @@
 
             <h3>🔨 Silver Breakdown</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks</span><div class="breakdown-number" id="silverFull64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder after 64s</span><div class="breakdown-number" id="silverRem64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 32-stacks</span><div class="breakdown-number" id="silverFull32">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder after 32s</span><div class="breakdown-number" id="silverRem32">0</div></div>
                 <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks from remainder</span><div class="breakdown-number" id="silverFull16">0</div></div>
                 <div class="breakdown-box"><span class="breakdown-title">Loose ore after 16s</span><div class="breakdown-number" id="silverLoose">0</div></div>
             </div>
@@ -477,6 +477,7 @@
 
             <div class="footer-note">
                 💡 Tip: Supplier Mode applies the 10% discount to gold-budget calculations and smoothly inverts the calculator colors.
+                Silver breaks into 32-stacks, then 16-stacks, then loose ore. Coal breaks into 64-stacks, then 16-stacks, then loose ore.
             </div>
         </div>
     </div>
@@ -489,7 +490,7 @@
         supplierDiscount: 0.1,
         smallStackSize: 16,
         fullStackSize: 32,
-        silverLargeStackSize: 64,
+        silverLargeStackSize: 32,
         coalStackSize: 64
     };
 
@@ -577,30 +578,43 @@
                 return price === 0 ? 0 : Math.floor(activeValue / price);
 
             case 'coalStacks64':
-                // User enters stacks, not raw coal ore.
-                // 64 coal ore = 1 coal stack. Since coal matched is 64 coal per 1 silver, this equals the silver ore amount.
-                return activeValue;
+                // User enters coal stacks of 64.
+                // 1 coal stack = 64 coal ore, which matches 64 silver ore.
+                return activeValue * coalSize;
 
             case 'coalOreToGive':
-                // Raw coal ore converts back to silver at 64 coal ore per 1 silver ore.
-                return Math.floor(activeValue / coalSize);
+                // Raw coal ore matches silver ore 1:1.
+                return activeValue;
 
             default:
                 return 0;
         }
     }
 
-    function updateBreakdown(prefix, oreAmount, largeStackSize, smallStackSize) {
+    function updateSilverBreakdown(oreAmount) {
         const ore = Math.floor(Math.max(0, oreAmount));
-        const fullLargeStacks = Math.floor(ore / largeStackSize);
-        const remainderAfterLarge = ore % largeStackSize;
-        const fullSmallStacks = Math.floor(remainderAfterLarge / smallStackSize);
-        const looseOre = remainderAfterLarge % smallStackSize;
+        const full32Stacks = Math.floor(ore / settings.fullStackSize);
+        const remainderAfter32 = ore % settings.fullStackSize;
+        const full16Stacks = Math.floor(remainderAfter32 / settings.smallStackSize);
+        const looseOre = remainderAfter32 % settings.smallStackSize;
 
-        document.getElementById(`${prefix}Full64`).innerText = formatNumber(fullLargeStacks);
-        document.getElementById(`${prefix}Rem64`).innerText = formatNumber(remainderAfterLarge);
-        document.getElementById(`${prefix}Full16`).innerText = formatNumber(fullSmallStacks);
-        document.getElementById(`${prefix}Loose`).innerText = formatNumber(looseOre);
+        document.getElementById('silverFull32').innerText = formatNumber(full32Stacks);
+        document.getElementById('silverRem32').innerText = formatNumber(remainderAfter32);
+        document.getElementById('silverFull16').innerText = formatNumber(full16Stacks);
+        document.getElementById('silverLoose').innerText = formatNumber(looseOre);
+    }
+
+    function updateCoalBreakdown(oreAmount) {
+        const ore = Math.floor(Math.max(0, oreAmount));
+        const full64Stacks = Math.floor(ore / settings.coalStackSize);
+        const remainderAfter64 = ore % settings.coalStackSize;
+        const full16Stacks = Math.floor(remainderAfter64 / settings.smallStackSize);
+        const looseOre = remainderAfter64 % settings.smallStackSize;
+
+        document.getElementById('coalFull64').innerText = formatNumber(full64Stacks);
+        document.getElementById('coalRem64').innerText = formatNumber(remainderAfter64);
+        document.getElementById('coalFull16').innerText = formatNumber(full16Stacks);
+        document.getElementById('coalLoose').innerText = formatNumber(looseOre);
     }
 
     function recompute() {
@@ -615,7 +629,6 @@
         const { activeField, activeValue } = active;
         const small = settings.smallStackSize;
         const full = settings.fullStackSize;
-        const silverLarge = settings.silverLargeStackSize;
         const coalSize = settings.coalStackSize;
         const price = activeUnitPrice();
         const stockVal = settings.currentStock;
@@ -626,7 +639,7 @@
         const silver16Eq = silverOre / small;
         const silver32Eq = silverOre / full;
         const goldPrice = silverOre * price;
-        const coalOreGiven = silverOre * coalSize;
+        const coalOreGiven = silverOre;
         const coalStacksGiven = coalOreGiven / coalSize;
         const totalSilverCoal = silverOre + coalOreGiven;
         const remainingStock = stockVal - silverOre;
@@ -645,8 +658,8 @@
         document.getElementById('enoughStock').innerHTML = enough;
         document.getElementById('detectedInputDesc').innerHTML = `${inputLabels[activeField]} = ${formatStackValue(activeValue)}`;
 
-        updateBreakdown('silver', silverOre, silverLarge, small);
-        updateBreakdown('coal', coalOreGiven, coalSize, small);
+        updateSilverBreakdown(silverOre);
+        updateCoalBreakdown(coalOreGiven);
     }
 
     function clearResultsOnError() {
@@ -661,8 +674,8 @@
             'silverRemaining',
             'enoughStock',
             'detectedInputDesc',
-            'silverFull64',
-            'silverRem64',
+            'silverFull32',
+            'silverRem32',
             'silverFull16',
             'silverLoose',
             'coalFull64',
