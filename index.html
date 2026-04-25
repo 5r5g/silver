@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>5R5G Silver + Coal | Dark Trade Terminal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', monospace;
+        }
+
+        body {
+            background: #0a0f14;
+            margin: 0;
+            padding: 20px;
+            color: #ecedee;
+        }
+
+        .main-container {
+            max-width: 1450px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .tool-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .tool-header h1 {
+            background: linear-gradient(135deg, #1e2a2a, #0f1a1f);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 32px;
+            border-radius: 80px;
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #eedb9b;
+            border: 1px solid #2d3e3e;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            margin: 0 0 10px 0;
+            backdrop-filter: blur(2px);
+        }
+
+        .sub {
+            background: #1e2a2a80;
+            backdrop-filter: blur(8px);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #bfc9d2;
+            border: 1px solid #2c423f;
+        }
+
+        /* Two columns */
+        .grid-2col {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #0f151cb3;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            border: 1px solid #25313a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            padding: 1.6rem 1.8rem;
+            flex: 1;
+            min-width: 290px;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #3e565e;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.5);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #dbb86b;
+            padding-left: 16px;
+            color: #f2e5c2;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 1.4rem 0 0.7rem 0;
+            color: #cfdde6;
+            border-bottom: 1px dashed #2c3f46;
+            padding-bottom: 6px;
+        }
+
+        /* INPUT GROUPS */
+        .input-group {
+            margin-bottom: 0.9rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #10171f;
+            padding: 8px 14px;
+            border-radius: 48px;
+            border: 1px solid #253139;
+            transition: 0.1s;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #cddfe7;
+            font-size: 0.85rem;
+        }
+
+        .yellow-input {
+            background-color: #1f2a24;
+            border: 1.5px solid #d6a85a;
+            border-radius: 48px;
+            padding: 8px 16px;
+            width: 150px;
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.1s;
+            font-family: monospace;
+            color: #f7eac5;
+        }
+
+        .yellow-input:focus {
+            border-color: #f5c542;
+            background-color: #262f28;
+            box-shadow: 0 0 0 2px #dbb86b40;
+        }
+
+        .result-value {
+            background: #0c141c;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-family: monospace;
+            font-size: 1rem;
+            color: #e9d9a7;
+            word-break: break-word;
+            min-width: 100px;
+            text-align: right;
+            border: 1px solid #2a3a3a;
+        }
+
+        .live-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1f2f32;
+            padding: 8px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .live-label {
+            font-weight: 500;
+            color: #9bb7c4;
+        }
+
+        .live-number {
+            font-weight: 700;
+            font-family: monospace;
+            background: #0e1920;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 0.5px solid #2f454a;
+        }
+
+        .badge {
+            background: #1a282f;
+            border-radius: 32px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+        }
+
+        .stock-warning {
+            background: #16212b;
+            border-left: 3px solid #dbb86b;
+            padding: 10px 14px;
+            border-radius: 24px;
+            margin-top: 16px;
+        }
+
+        .breakdown-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            justify-content: space-between;
+        }
+
+        .breakdown-box {
+            background: #0d151f;
+            padding: 12px 12px;
+            border-radius: 24px;
+            flex: 1;
+            min-width: 130px;
+            text-align: center;
+            border: 1px solid #24343c;
+        }
+
+        .breakdown-title {
+            font-weight: 600;
+            background: #1d2d32;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: #cbd5e1;
+        }
+
+        .quick-settings {
+            background: #0d1822;
+            border-radius: 24px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 1rem;
+            border: 1px solid #253c3f;
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border-color: #2f454a;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8499a6;
+            background: #0f171fcc;
+            padding: 12px;
+            border-radius: 36px;
+            margin-top: 24px;
+        }
+
+        .toggle-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            width: 38px;
+            height: 20px;
+            appearance: none;
+            background: #2c3e3e;
+            border-radius: 40px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #3f605a;
+        }
+
+        .toggle-switch input:checked {
+            background: #dbb86b;
+        }
+
+        .toggle-switch input::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            background: #f0f2f5;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            transition: 0.2s;
+        }
+
+        .toggle-switch input:checked::before {
+            transform: translateX(17px);
+            background: #1f2a1c;
+        }
+
+        .inline-icon {
+            font-size: 1rem;
+            vertical-align: middle;
+        }
+
+        button.icon-btn {
+            background: none;
+            border: none;
+            color: #dbb86b;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 6px;
+        }
+
+        @media (max-width: 760px) {
+            .card {
+                padding: 1rem;
+            }
+            .yellow-input {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="tool-header">
+        <h1>⛏️ 5R5G SILVER + COAL ⚙️</h1>
+        <div class="sub">✦ one yellow box | live trade terminal ✦</div>
+    </div>
+
+    <div class="grid-2col">
+        <!-- INPUT PANEL -->
+        <div class="card">
+            <h2>📦 INPUT (one only)</h2>
+            <div id="input-zone">
+                <div class="input-group"><label>🪙 Silver ore wanted</label><input type="number" id="silverOreWanted" class="yellow-input" step="1" placeholder="amount"></div>
+                <div class="input-group"><label>📦 Silver stacks of 16</label><input type="number" id="silverStacks16" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>📦 Silver stacks of 32</label><input type="number" id="silverStacks32" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>💰 Gold budget (regular)</label><input type="number" id="goldBudgetRegular" class="yellow-input" step="1" placeholder="gold"></div>
+                <div class="input-group"><label>🏷️ Gold budget (supplier)</label><input type="number" id="goldBudgetSupplier" class="yellow-input" step="1" placeholder="gold"></div>
+                <div class="input-group"><label>🪨 Coal stacks of 64</label><input type="number" id="coalStacks64" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>⛏️ Coal ore to give</label><input type="number" id="coalOreToGive" class="yellow-input" step="1" placeholder="ore units"></div>
+            </div>
+            <div id="input-status" class="stock-warning">
+                ⚡ STATUS: <span id="statusMessage">awaiting input...</span>
+            </div>
+
+            <div class="quick-settings">
+                <div style="font-weight:600; margin-bottom:12px; display:flex; justify-content:space-between;">
+                    <span>⚙️ TRADER SETTINGS</span>
+                    <span class="toggle-switch">🏷️ Supplier mode <input type="checkbox" id="supplierToggle"></span>
+                </div>
+                <div class="settings-row"><span>📦 Silver stock (ore):</span> <span id="displayStock">0</span> <button class="icon-btn" onclick="editStock()">✏️</button></div>
+                <div class="settings-row"><span>💰 Base unit price:</span> <span id="displayUnitPrice">150</span> <button class="icon-btn" onclick="editUnitPrice()">✏️</button></div>
+                <div class="settings-row"><span>🏷️ Supplier discount:</span> <span id="displayDiscount">10%</span> <button class="icon-btn" onclick="editDiscount()">✏️</button></div>
+                <div class="settings-row"><span>📐 Small stack (16):</span> <span id="smallStackSize">16</span></div>
+                <div class="settings-row"><span>📐 Silver bulk (32):</span> <span id="fullStackSize">32</span></div>
+                <div class="settings-row"><span>🪨 Coal stack (64):</span> <span id="coalStackSize">64</span></div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: LIVE RESULTS + FIXED BREAKDOWNS -->
+        <div class="card">
+            <h2>📊 LIVE EXCHANGE</h2>
+            <div id="liveResults">
+                <div class="live-row"><span class="live-label">🪙 Silver ore to give:</span> <span id="silverToGive" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Silver stacks (16 eq):</span> <span id="silverStacks16Result" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Silver stacks (32 eq):</span> <span id="silverStacks32Result" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">💰 Gold price (regular):</span> <span id="goldPriceRegular" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">💰 Gold price (supplier):</span> <span id="goldPriceSupplier" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">🪨 Coal ore to give:</span> <span id="coalOreResult" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">🪨 Coal stacks of 64:</span> <span id="coalStacks64Result" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Total silver+coal qty:</span> <span id="totalSilverCoal" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📉 Silver left in stock:</span> <span id="silverRemaining" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">✅ Enough stock?</span> <span id="enoughStock" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">🔍 Active input:</span> <span id="detectedInputDesc" class="live-number" style="font-size:0.75rem;">—</span></div>
+            </div>
+
+            <h3>🔨 SILVER BREAKDOWN</h3>
+            <div class="breakdown-grid">
+                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks (32 ea)</span><br><span id="silverFull64" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder</span><br><span id="silverRem64" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks</span><br><span id="silverFull16" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose ore</span><br><span id="silverLoose" class="result-value" style="background:transparent;">0</span></div>
+            </div>
+            
+            <h3>🪨 COAL BREAKDOWN</h3>
+            <div class="breakdown-grid">
+                <div class="breakdown-box"><span class="breakdown-title">Coal 64-stacks</span><br><span id="coalFull64" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder ore</span><br><span id="coalRem64" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">16-stacks (from rem)</span><br><span id="coalFull16" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose coal</span><br><span id="coalLoose" class="result-value" style="background:transparent;">0</span></div>
+            </div>
+            <div class="footer-note">
+                💡 Tip: Toggle "Supplier mode" to auto-apply discount. Only one yellow field at a time. Coal stacks = number of 64-stacks.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Settings state
+    let settings = {
+        currentStock: 0,
+        regularUnitPrice: 150,
+        supplierDiscount: 0.1,
+        smallStackSize: 16,
+        fullStackSize: 32,
+        coalStackSize: 64
+    };
+    let supplierActive = false;  // supplier mode toggle
+
+    function supplierUnitPrice() {
+        if (supplierActive) return settings.regularUnitPrice * (1 - settings.supplierDiscount);
+        return settings.regularUnitPrice;
+    }
+
+    // DOM elements
+    const inputs = {
+        silverOreWanted: document.getElementById('silverOreWanted'),
+        silverStacks16: document.getElementById('silverStacks16'),
+        silverStacks32: document.getElementById('silverStacks32'),
+        goldBudgetRegular: document.getElementById('goldBudgetRegular'),
+        goldBudgetSupplier: document.getElementById('goldBudgetSupplier'),
+        coalStacks64: document.getElementById('coalStacks64'),
+        coalOreToGive: document.getElementById('coalOreToGive')
+    };
+
+    function clearAllInputsExcept(keepId = null) {
+        for (let [key, elem] of Object.entries(inputs)) {
+            if (elem && keepId !== elem.id) elem.value = '';
+        }
+    }
+
+    function recompute() {
+        let activeField = null;
+        let activeValue = null;
+        
+        for (let [key, elem] of Object.entries(inputs)) {
+            if (elem && elem.value !== undefined && elem.value.trim() !== '') {
+                let num = parseFloat(elem.value);
+                if (!isNaN(num) && isFinite(num)) {
+                    if (activeField !== null) {
+                        document.getElementById('statusMessage').innerHTML = '❌ Only ONE yellow box allowed. Clear others.';
+                        clearResultsOnError();
+                        return;
+                    }
+                    activeField = elem.id;
+                    activeValue = num;
+                }
+            }
+        }
+
+        if (activeField === null) {
+            document.getElementById('statusMessage').innerHTML = '⚠️ Enter a value in one yellow field.';
+            clearResultsOnError();
+            return;
+        }
+
+        const small = settings.smallStackSize;
+        const full = settings.fullStackSize;
+        const coalSize = settings.coalStackSize;
+        const regPrice = settings.regularUnitPrice;
+        const suppPrice = supplierUnitPrice();
+        const stockVal = settings.currentStock;
+        
+        let silverOre = null;
+        
+        switch (activeField) {
+            case 'silverOreWanted': silverOre = activeValue; break;
+            case 'silverStacks16': silverOre = activeValue * small; break;
+            case 'silverStacks32': silverOre = activeValue * full; break;
+            case 'goldBudgetRegular': silverOre = (regPrice === 0 ? 0 : Math.floor(activeValue / regPrice)); break;
+            case 'goldBudgetSupplier': silverOre = (suppPrice === 0 ? 0 : Math.floor(activeValue / suppPrice)); break;
+            case 'coalStacks64': silverOre = activeValue * full / coalSize; break;
+            case 'coalOreToGive': silverOre = activeValue / coalSize; break;
+            default: silverOre = 0;
+        }
+        if (silverOre === null || isNaN(silverOre)) silverOre = 0;
+        silverOre = Math.floor(silverOre);
+        
+        document.getElementById('statusMessage').innerHTML = `✅ Active: ${activeField} = ${activeValue} → ${silverOre} silver ore`;
+        
+        // LIVE results
+        const silver16Eq = silverOre / small;
+        const silver32Eq = silverOre / full;
+        const goldRegular = silverOre * regPrice;
+        const goldSupplierCalc = silverOre * suppPrice;
+        const coalOreGiven = silverOre * coalSize;
+        const coalStacksGiven = coalOreGiven / coalSize;
+        const totalSum = silverOre + coalOreGiven;
+        const remainingStock = stockVal - silverOre;
+        const enough = (stockVal >= silverOre) ? 'YES ✓' : 'NO ✗';
+        
+        document.getElementById('silverToGive').innerText = silverOre.toLocaleString();
+        document.getElementById('silverStacks16Result').innerText = silver16Eq.toFixed(2);
+        document.getElementById('silverStacks32Result').innerText = silver32Eq.toFixed(2);
+        document.getElementById('goldPriceRegular').innerHTML = Math.floor(goldRegular).toLocaleString() + ' gold';
+        document.getElementById('goldPriceSupplier').innerHTML = Math.floor(goldSupplierCalc).toLocaleString() + ' gold';
+        document.getElementById('coalOreResult').innerHTML = Math.floor(coalOreGiven).toLocaleString();
+        document.getElementById('coalStacks64Result').innerHTML = coalStacksGiven.toFixed(2) + ' stacks';
+        document.getElementById('totalSilverCoal').innerHTML = Math.floor(totalSum).toLocaleString();
+        document.getElementById('silverRemaining').innerHTML = remainingStock.toLocaleString();
+        document.getElementById('enoughStock').innerHTML = enough;
+        document.getElementById('detectedInputDesc').innerHTML = `${activeField} = ${activeValue}`;
+        
+        // FIXED SILVER BREAKDOWN (full 16-stacks from remainder after 64-stacks)
+        const silverFull64Stacks = Math.floor(silverOre / full);        // full=32
+        const silverRemAfter64 = silverOre % full;
+        const silverFull16 = Math.floor(silverRemAfter64 / small);
+        const silverLooseFinal = silverRemAfter64 % small;
+        
+        document.getElementById('silverFull64').innerText = silverFull64Stacks;
+        document.getElementById('silverRem64').innerText = silverRemAfter64;
+        document.getElementById('silverFull16').innerText = silverFull16;
+        document.getElementById('silverLoose').innerText = silverLooseFinal;
+        
+        // COAL BREAKDOWN: show stacks and remainders correctly
+        const coalOreInt = Math.floor(coalOreGiven);
+        const coalFullStacks = Math.floor(coalOreInt / coalSize);
+        const coalRemainderOre = coalOreInt % coalSize;
+        const coal16FromRem = Math.floor(coalRemainderOre / small);
+        const coalLooseFinal = coalRemainderOre % small;
+        
+        document.getElementById('coalFull64').innerText = coalFullStacks;
+        document.getElementById('coalRem64').innerText = coalRemainderOre;
+        document.getElementById('coalFull16').innerText = coal16FromRem;
+        document.getElementById('coalLoose').innerText = coalLooseFinal;
+    }
+    
+    function clearResultsOnError() {
+        const ids = ['silverToGive','silverStacks16Result','silverStacks32Result','goldPriceRegular','goldPriceSupplier','coalOreResult','coalStacks64Result','totalSilverCoal','silverRemaining','enoughStock','detectedInputDesc','silverFull64','silverRem64','silverFull16','silverLoose','coalFull64','coalRem64','coalFull16','coalLoose'];
+        ids.forEach(id => { let el = document.getElementById(id); if(el) el.innerText = '—'; });
+    }
+    
+    function attachHandlers() {
+        for (let [key, elem] of Object.entries(inputs)) {
+            elem.addEventListener('input', function(e) {
+                if (elem.value.trim() === '') return;
+                const num = parseFloat(elem.value);
+                if (isNaN(num)) return;
+                for (let [ok, other] of Object.entries(inputs)) {
+                    if (other !== elem) other.value = '';
+                }
+                recompute();
+            });
+        }
+    }
+    
+    function updateSettingsDisplay() {
+        document.getElementById('displayStock').innerText = settings.currentStock;
+        document.getElementById('displayUnitPrice').innerText = settings.regularUnitPrice;
+        document.getElementById('displayDiscount').innerText = (settings.supplierDiscount * 100) + '%';
+        document.getElementById('smallStackSize').innerText = settings.smallStackSize;
+        document.getElementById('fullStackSize').innerText = settings.fullStackSize;
+        document.getElementById('coalStackSize').innerText = settings.coalStackSize;
+        recompute();
+    }
+    
+    window.editStock = function() {
+        let val = prompt('Silver ore stock:', settings.currentStock);
+        if(val !== null && !isNaN(parseFloat(val))) { settings.currentStock = parseFloat(val); updateSettingsDisplay(); }
+    };
+    window.editUnitPrice = function() {
+        let val = prompt('Base unit price (gold per ore):', settings.regularUnitPrice);
+        if(val !== null && !isNaN(parseFloat(val))) { settings.regularUnitPrice = parseFloat(val); updateSettingsDisplay(); }
+    };
+    window.editDiscount = function() {
+        let val = prompt('Supplier discount (0.1 = 10%):', settings.supplierDiscount);
+        if(val !== null && !isNaN(parseFloat(val))) { settings.supplierDiscount = parseFloat(val); updateSettingsDisplay(); }
+    };
+    
+    const supplierToggle = document.getElementById('supplierToggle');
+    supplierToggle.addEventListener('change', (e) => {
+        supplierActive = e.target.checked;
+        updateSettingsDisplay();
+    });
+    
+    function init() {
+        attachHandlers();
+        updateSettingsDisplay();
+        settings.currentStock = 0;
+        settings.regularUnitPrice = 150;
+        settings.supplierDiscount = 0.1;
+        supplierActive = false;
+        supplierToggle.checked = false;
+        updateSettingsDisplay();
+    }
+    init();
+</script>
+</body>
+</html>
