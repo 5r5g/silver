@@ -7,7 +7,7 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', monospace;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', monospace;
         }
 
         body {
@@ -18,7 +18,7 @@
         }
 
         .main-container {
-            max-width: 1450px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -32,104 +32,105 @@
             background: linear-gradient(135deg, #1e2a2a, #0f1a1f);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
-            padding: 12px 32px;
+            padding: 10px 28px;
             border-radius: 80px;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: #eedb9b;
             border: 1px solid #2d3e3e;
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             margin: 0 0 10px 0;
-            backdrop-filter: blur(2px);
         }
 
         .sub {
             background: #1e2a2a80;
             backdrop-filter: blur(8px);
-            padding: 6px 18px;
+            padding: 5px 16px;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #bfc9d2;
             border: 1px solid #2c423f;
+            display: inline-block;
         }
 
         /* Two columns */
         .grid-2col {
             display: flex;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
         .card {
             background: #0f151cb3;
             backdrop-filter: blur(2px);
-            border-radius: 32px;
+            border-radius: 28px;
             border: 1px solid #25313a;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            padding: 1.6rem 1.8rem;
+            padding: 1.3rem 1.5rem;
             flex: 1;
-            min-width: 290px;
+            min-width: 320px;
             transition: all 0.2s;
         }
 
         .card:hover {
             border-color: #3e565e;
-            box-shadow: 0 18px 36px rgba(0,0,0,0.5);
         }
 
         .card h2 {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 600;
             margin-top: 0;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             border-left: 4px solid #dbb86b;
-            padding-left: 16px;
+            padding-left: 14px;
             color: #f2e5c2;
         }
 
         .card h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
-            margin: 1.4rem 0 0.7rem 0;
+            margin: 1.2rem 0 0.6rem 0;
             color: #cfdde6;
             border-bottom: 1px dashed #2c3f46;
-            padding-bottom: 6px;
+            padding-bottom: 5px;
         }
 
         /* INPUT GROUPS */
         .input-group {
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.7rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             background: #10171f;
-            padding: 8px 14px;
+            padding: 6px 14px;
             border-radius: 48px;
             border: 1px solid #253139;
-            transition: 0.1s;
+            gap: 10px;
         }
 
         .input-group label {
             font-weight: 500;
             color: #cddfe7;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            flex: 1;
+            min-width: 140px;
         }
 
         .yellow-input {
             background-color: #1f2a24;
             border: 1.5px solid #d6a85a;
             border-radius: 48px;
-            padding: 8px 16px;
-            width: 150px;
+            padding: 6px 12px;
+            width: 130px;
             font-weight: 500;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
-            transition: 0.1s;
             font-family: monospace;
             color: #f7eac5;
         }
@@ -142,16 +143,16 @@
 
         .result-value {
             background: #0c141c;
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 40px;
             font-weight: 600;
             font-family: monospace;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #e9d9a7;
-            word-break: break-word;
-            min-width: 100px;
             text-align: right;
             border: 1px solid #2a3a3a;
+            display: inline-block;
+            min-width: 80px;
         }
 
         .live-row {
@@ -159,55 +160,53 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #1f2f32;
-            padding: 8px 0;
-            flex-wrap: wrap;
-            gap: 8px;
+            padding: 6px 0;
+            gap: 12px;
         }
 
         .live-label {
             font-weight: 500;
             color: #9bb7c4;
+            font-size: 0.8rem;
+            flex: 1;
         }
 
         .live-number {
             font-weight: 700;
             font-family: monospace;
             background: #0e1920;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border: 0.5px solid #2f454a;
-        }
-
-        .badge {
-            background: #1a282f;
-            border-radius: 32px;
-            padding: 4px 12px;
-            font-size: 0.7rem;
+            min-width: 100px;
+            text-align: center;
+            display: inline-block;
         }
 
         .stock-warning {
             background: #16212b;
             border-left: 3px solid #dbb86b;
-            padding: 10px 14px;
-            border-radius: 24px;
-            margin-top: 16px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin-top: 14px;
+            font-size: 0.8rem;
         }
 
         .breakdown-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.6rem;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
             justify-content: space-between;
         }
 
         .breakdown-box {
             background: #0d151f;
-            padding: 12px 12px;
-            border-radius: 24px;
+            padding: 8px 8px;
+            border-radius: 20px;
             flex: 1;
-            min-width: 130px;
+            min-width: 100px;
             text-align: center;
             border: 1px solid #24343c;
         }
@@ -216,16 +215,26 @@
             font-weight: 600;
             background: #1d2d32;
             display: inline-block;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 50px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+
+        .breakdown-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: monospace;
+            color: #e9d9a7;
+            display: block;
+            margin-top: 4px;
         }
 
         .quick-settings {
             background: #0d1822;
-            border-radius: 24px;
-            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            padding: 0.7rem 1rem;
             margin-top: 1rem;
             border: 1px solid #253c3f;
         }
@@ -233,87 +242,133 @@
         .settings-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
             gap: 8px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-bottom: 8px;
         }
 
-        hr {
-            margin: 1rem 0;
-            border-color: #2f454a;
+        .settings-row span:first-child {
+            color: #9bb7c4;
+        }
+
+        .settings-row span:last-child {
+            font-family: monospace;
+            font-weight: 600;
+            color: #eedb9b;
         }
 
         .footer-note {
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: #8499a6;
             background: #0f171fcc;
-            padding: 12px;
-            border-radius: 36px;
-            margin-top: 24px;
+            padding: 10px;
+            border-radius: 28px;
+            margin-top: 20px;
+        }
+
+        /* FIXED TOGGLE SWITCH */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a1118;
+            padding: 8px 12px;
+            border-radius: 40px;
+            margin-bottom: 12px;
+            border: 1px solid #253c3f;
+        }
+
+        .toggle-label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #cddfe7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .toggle-switch {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
         }
 
         .toggle-switch input {
-            width: 38px;
-            height: 20px;
-            appearance: none;
-            background: #2c3e3e;
-            border-radius: 40px;
-            position: relative;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2c3e3e;
             transition: 0.2s;
+            border-radius: 34px;
             border: 1px solid #3f605a;
         }
 
-        .toggle-switch input:checked {
-            background: #dbb86b;
-        }
-
-        .toggle-switch input::before {
-            content: "";
-            width: 16px;
-            height: 16px;
-            background: #f0f2f5;
-            border-radius: 50%;
+        .slider:before {
             position: absolute;
-            top: 2px;
+            content: "";
+            height: 18px;
+            width: 18px;
             left: 3px;
+            bottom: 2px;
+            background-color: #f0f2f5;
             transition: 0.2s;
+            border-radius: 50%;
         }
 
-        .toggle-switch input:checked::before {
-            transform: translateX(17px);
-            background: #1f2a1c;
+        input:checked + .slider {
+            background-color: #dbb86b;
         }
 
-        .inline-icon {
-            font-size: 1rem;
-            vertical-align: middle;
+        input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: #1f2a1c;
         }
 
-        button.icon-btn {
-            background: none;
+        .icon-btn {
+            background: #1a2a2a;
             border: none;
             color: #dbb86b;
             cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 6px;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 30px;
+            margin-left: 8px;
+            transition: 0.1s;
         }
 
-        @media (max-width: 760px) {
+        .icon-btn:hover {
+            background: #2a403a;
+            color: #f5c542;
+        }
+
+        @media (max-width: 780px) {
             .card {
                 padding: 1rem;
             }
             .yellow-input {
-                width: 120px;
+                width: 100px;
+                font-size: 0.75rem;
+            }
+            .input-group label {
+                min-width: 110px;
+                font-size: 0.7rem;
+            }
+            .live-number {
+                min-width: 80px;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -343,20 +398,23 @@
             </div>
 
             <div class="quick-settings">
-                <div style="font-weight:600; margin-bottom:12px; display:flex; justify-content:space-between;">
-                    <span>⚙️ TRADER SETTINGS</span>
-                    <span class="toggle-switch">🏷️ Supplier mode <input type="checkbox" id="supplierToggle"></span>
+                <div class="toggle-wrapper">
+                    <span class="toggle-label">🏷️ Supplier Mode</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="supplierToggle">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="settings-row"><span>📦 Silver stock (ore):</span> <span id="displayStock">0</span> <button class="icon-btn" onclick="editStock()">✏️</button></div>
-                <div class="settings-row"><span>💰 Base unit price:</span> <span id="displayUnitPrice">150</span> <button class="icon-btn" onclick="editUnitPrice()">✏️</button></div>
-                <div class="settings-row"><span>🏷️ Supplier discount:</span> <span id="displayDiscount">10%</span> <button class="icon-btn" onclick="editDiscount()">✏️</button></div>
+                <div class="settings-row"><span>📦 Silver stock (ore):</span> <span><span id="displayStock">0</span> <button class="icon-btn" onclick="editStock()">✏️</button></span></div>
+                <div class="settings-row"><span>💰 Base unit price:</span> <span><span id="displayUnitPrice">150</span> <button class="icon-btn" onclick="editUnitPrice()">✏️</button></span></div>
+                <div class="settings-row"><span>🏷️ Supplier discount:</span> <span><span id="displayDiscount">10%</span> <button class="icon-btn" onclick="editDiscount()">✏️</button></span></div>
                 <div class="settings-row"><span>📐 Small stack (16):</span> <span id="smallStackSize">16</span></div>
                 <div class="settings-row"><span>📐 Silver bulk (32):</span> <span id="fullStackSize">32</span></div>
                 <div class="settings-row"><span>🪨 Coal stack (64):</span> <span id="coalStackSize">64</span></div>
             </div>
         </div>
 
-        <!-- RIGHT PANEL: LIVE RESULTS + FIXED BREAKDOWNS -->
+        <!-- RIGHT PANEL: LIVE RESULTS -->
         <div class="card">
             <h2>📊 LIVE EXCHANGE</h2>
             <div id="liveResults">
@@ -370,26 +428,26 @@
                 <div class="live-row"><span class="live-label">📦 Total silver+coal qty:</span> <span id="totalSilverCoal" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">📉 Silver left in stock:</span> <span id="silverRemaining" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">✅ Enough stock?</span> <span id="enoughStock" class="live-number">—</span></div>
-                <div class="live-row"><span class="live-label">🔍 Active input:</span> <span id="detectedInputDesc" class="live-number" style="font-size:0.75rem;">—</span></div>
+                <div class="live-row"><span class="live-label">🔍 Active input:</span> <span id="detectedInputDesc" class="live-number" style="font-size:0.7rem;">—</span></div>
             </div>
 
             <h3>🔨 SILVER BREAKDOWN</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks (32 ea)</span><br><span id="silverFull64" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder</span><br><span id="silverRem64" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks</span><br><span id="silverFull16" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose ore</span><br><span id="silverLoose" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks (32 ea)</span><div class="breakdown-number" id="silverFull64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder</span><div class="breakdown-number" id="silverRem64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks</span><div class="breakdown-number" id="silverFull16">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose ore</span><div class="breakdown-number" id="silverLoose">0</div></div>
             </div>
             
             <h3>🪨 COAL BREAKDOWN</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Coal 64-stacks</span><br><span id="coalFull64" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder ore</span><br><span id="coalRem64" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">16-stacks (from rem)</span><br><span id="coalFull16" class="result-value" style="background:transparent;">0</span></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose coal</span><br><span id="coalLoose" class="result-value" style="background:transparent;">0</span></div>
+                <div class="breakdown-box"><span class="breakdown-title">Coal 64-stacks</span><div class="breakdown-number" id="coalFull64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder ore</span><div class="breakdown-number" id="coalRem64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">16-stacks (from rem)</span><div class="breakdown-number" id="coalFull16">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose coal</span><div class="breakdown-number" id="coalLoose">0</div></div>
             </div>
             <div class="footer-note">
-                💡 Tip: Toggle "Supplier mode" to auto-apply discount. Only one yellow field at a time. Coal stacks = number of 64-stacks.
+                💡 Tip: Toggle "Supplier Mode" to auto-apply discount. Only one yellow field at a time.
             </div>
         </div>
     </div>
@@ -405,14 +463,13 @@
         fullStackSize: 32,
         coalStackSize: 64
     };
-    let supplierActive = false;  // supplier mode toggle
+    let supplierActive = false;
 
     function supplierUnitPrice() {
         if (supplierActive) return settings.regularUnitPrice * (1 - settings.supplierDiscount);
         return settings.regularUnitPrice;
     }
 
-    // DOM elements
     const inputs = {
         silverOreWanted: document.getElementById('silverOreWanted'),
         silverStacks16: document.getElementById('silverStacks16'),
@@ -478,7 +535,6 @@
         
         document.getElementById('statusMessage').innerHTML = `✅ Active: ${activeField} = ${activeValue} → ${silverOre} silver ore`;
         
-        // LIVE results
         const silver16Eq = silverOre / small;
         const silver32Eq = silverOre / full;
         const goldRegular = silverOre * regPrice;
@@ -501,8 +557,7 @@
         document.getElementById('enoughStock').innerHTML = enough;
         document.getElementById('detectedInputDesc').innerHTML = `${activeField} = ${activeValue}`;
         
-        // FIXED SILVER BREAKDOWN (full 16-stacks from remainder after 64-stacks)
-        const silverFull64Stacks = Math.floor(silverOre / full);        // full=32
+        const silverFull64Stacks = Math.floor(silverOre / full);
         const silverRemAfter64 = silverOre % full;
         const silverFull16 = Math.floor(silverRemAfter64 / small);
         const silverLooseFinal = silverRemAfter64 % small;
@@ -512,7 +567,6 @@
         document.getElementById('silverFull16').innerText = silverFull16;
         document.getElementById('silverLoose').innerText = silverLooseFinal;
         
-        // COAL BREAKDOWN: show stacks and remainders correctly
         const coalOreInt = Math.floor(coalOreGiven);
         const coalFullStacks = Math.floor(coalOreInt / coalSize);
         const coalRemainderOre = coalOreInt % coalSize;
