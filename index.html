@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>5R5G Silver Calculator</title>
+    <title>5R5G Silver Calculator | Exact Spreadsheet Match</title>
     <style>
         * {
             box-sizing: border-box;
@@ -22,7 +22,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         .tool-header {
             text-align: center;
             margin-bottom: 28px;
@@ -56,7 +55,6 @@
             display: inline-block;
         }
 
-        /* Two columns */
         .grid-2col {
             display: flex;
             flex-wrap: wrap;
@@ -99,7 +97,6 @@
             padding-bottom: 5px;
         }
 
-        /* INPUT GROUPS */
         .input-group {
             margin-bottom: 0.7rem;
             display: flex;
@@ -139,20 +136,6 @@
             border-color: #f5c542;
             background-color: #262f28;
             box-shadow: 0 0 0 2px #dbb86b40;
-        }
-
-        .result-value {
-            background: #0c141c;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: #e9d9a7;
-            text-align: right;
-            border: 1px solid #2a3a3a;
-            display: inline-block;
-            min-width: 80px;
         }
 
         .live-row {
@@ -269,7 +252,6 @@
             margin-top: 20px;
         }
 
-        /* FIXED TOGGLE SWITCH */
         .toggle-wrapper {
             display: flex;
             align-items: center;
@@ -376,21 +358,20 @@
 <body>
 <div class="main-container">
     <div class="tool-header">
-        <h1>⛏️ 5R5G SILVER CALCULATOR </h1>
+        <h1>⛏️ 5R5G SILVER CALCULATOR ⚙️</h1>
         <div class="sub">✦ I WILL MATCH THE AMOUNT OF SILVER YOU PURCHASE WITH COAL ✦</div>
     </div>
 
     <div class="grid-2col">
-        <!-- INPUT PANEL -->
         <div class="card">
             <h2>📦 INPUT (one only)</h2>
             <div id="input-zone">
                 <div class="input-group"><label>🪙 Silver ore wanted</label><input type="number" id="silverOreWanted" class="yellow-input" step="1" placeholder="amount"></div>
-                <div class="input-group"><label>📦 Silver stacks of 16</label><input type="number" id="silverStacks16" class="yellow-input" step="1" placeholder="stacks"></div>
-                <div class="input-group"><label>📦 Silver stacks of 32</label><input type="number" id="silverStacks32" class="yellow-input" step="1" placeholder="stacks"></div>
-                <div class="input-group"><label>💰 Gold budget (regular)</label><input type="number" id="goldBudgetRegular" class="yellow-input" step="1" placeholder="gold"></div>
-                <div class="input-group"><label>🏷️ Gold budget (supplier)</label><input type="number" id="goldBudgetSupplier" class="yellow-input" step="1" placeholder="gold"></div>
-                <div class="input-group"><label>🪨 Coal stacks of 64</label><input type="number" id="coalStacks64" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>📦 Silver stacks of 16 wanted</label><input type="number" id="silverStacks16" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>📦 Silver stacks of 32 wanted</label><input type="number" id="silverStacks32" class="yellow-input" step="1" placeholder="stacks"></div>
+                <div class="input-group"><label>💰 Gold budget (regular customer)</label><input type="number" id="goldBudgetRegular" class="yellow-input" step="1" placeholder="gold"></div>
+                <div class="input-group"><label>🏷️ Gold budget (supplier 10% off)</label><input type="number" id="goldBudgetSupplier" class="yellow-input" step="1" placeholder="gold"></div>
+                <div class="input-group"><label>🪨 Coal stacks of 64 to give</label><input type="number" id="coalStacks64" class="yellow-input" step="1" placeholder="stacks"></div>
                 <div class="input-group"><label>⛏️ Coal ore to give</label><input type="number" id="coalOreToGive" class="yellow-input" step="1" placeholder="ore units"></div>
             </div>
             <div id="input-status" class="stock-warning">
@@ -399,69 +380,68 @@
 
             <div class="quick-settings">
                 <div class="toggle-wrapper">
-                    <span class="toggle-label">🏷️ Supplier Mode</span>
+                    <span class="toggle-label">🏷️ Supplier Mode (affects gold budgets)</span>
                     <label class="toggle-switch">
                         <input type="checkbox" id="supplierToggle">
                         <span class="slider"></span>
                     </label>
                 </div>
                 <div class="settings-row"><span>📦 Silver stock (ore):</span> <span><span id="displayStock">0</span> <button class="icon-btn" onclick="editStock()">✏️</button></span></div>
-                <div class="settings-row"><span>💰 Base unit price:</span> <span><span id="displayUnitPrice">150</span> <button class="icon-btn" onclick="editUnitPrice()">✏️</button></span></div>
+                <div class="settings-row"><span>💰 Regular unit price:</span> <span><span id="displayUnitPrice">150</span> <button class="icon-btn" onclick="editUnitPrice()">✏️</button></span></div>
                 <div class="settings-row"><span>🏷️ Supplier discount:</span> <span><span id="displayDiscount">10%</span> <button class="icon-btn" onclick="editDiscount()">✏️</button></span></div>
-                <div class="settings-row"><span>📐 Small stack (16):</span> <span id="smallStackSize">16</span></div>
-                <div class="settings-row"><span>📐 Silver bulk (32):</span> <span id="fullStackSize">32</span></div>
-                <div class="settings-row"><span>🪨 Coal stack (64):</span> <span id="coalStackSize">64</span></div>
+                <div class="settings-row"><span>📐 Small stack size:</span> <span id="smallStackSize">16</span></div>
+                <div class="settings-row"><span>📐 Full stack size:</span> <span id="fullStackSize">32</span></div>
+                <div class="settings-row"><span>🪨 Coal stack size:</span> <span id="coalStackSize">64</span></div>
             </div>
         </div>
 
-        <!-- RIGHT PANEL: LIVE RESULTS -->
         <div class="card">
             <h2>📊 LIVE EXCHANGE</h2>
             <div id="liveResults">
                 <div class="live-row"><span class="live-label">🪙 Silver ore to give:</span> <span id="silverToGive" class="live-number">—</span></div>
-                <div class="live-row"><span class="live-label">📦 Silver stacks (16 eq):</span> <span id="silverStacks16Result" class="live-number">—</span></div>
-                <div class="live-row"><span class="live-label">📦 Silver stacks (32 eq):</span> <span id="silverStacks32Result" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Silver stacks of 16:</span> <span id="silverStacks16Result" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Silver stacks of 32:</span> <span id="silverStacks32Result" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">💰 Gold price (regular):</span> <span id="goldPriceRegular" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">💰 Gold price (supplier):</span> <span id="goldPriceSupplier" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">🪨 Coal ore to give:</span> <span id="coalOreResult" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">🪨 Coal stacks of 64:</span> <span id="coalStacks64Result" class="live-number">—</span></div>
-                <div class="live-row"><span class="live-label">📦 Total silver+coal qty:</span> <span id="totalSilverCoal" class="live-number">—</span></div>
-                <div class="live-row"><span class="live-label">📉 Silver left in stock:</span> <span id="silverRemaining" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📦 Total silver + coal:</span> <span id="totalSilverCoal" class="live-number">—</span></div>
+                <div class="live-row"><span class="live-label">📉 Silver remaining:</span> <span id="silverRemaining" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">✅ Enough stock?</span> <span id="enoughStock" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">🔍 Active input:</span> <span id="detectedInputDesc" class="live-number" style="font-size:0.7rem;">—</span></div>
             </div>
 
-            <h3>🔨 SILVER BREAKDOWN</h3>
+            <h3>🔨 SILVER BREAKDOWN (using 64-stack reference)</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks (32 ea)</span><div class="breakdown-number" id="silverFull64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder</span><div class="breakdown-number" id="silverRem64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks</span><div class="breakdown-number" id="silverFull16">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose ore</span><div class="breakdown-number" id="silverLoose">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks (of 32 ore each)</span><div class="breakdown-number" id="silverFull64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder after 64s</span><div class="breakdown-number" id="silverRem64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks from rem</span><div class="breakdown-number" id="silverFull16">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose ore after 16s</span><div class="breakdown-number" id="silverLoose">0</div></div>
             </div>
             
             <h3>🪨 COAL BREAKDOWN</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Coal 64-stacks</span><div class="breakdown-number" id="coalFull64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder ore</span><div class="breakdown-number" id="coalRem64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">16-stacks (from rem)</span><div class="breakdown-number" id="coalFull16">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose coal</span><div class="breakdown-number" id="coalLoose">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks</span><div class="breakdown-number" id="coalFull64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Remainder after 64s</span><div class="breakdown-number" id="coalRem64">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks from rem</span><div class="breakdown-number" id="coalFull16">0</div></div>
+                <div class="breakdown-box"><span class="breakdown-title">Loose ore after 16s</span><div class="breakdown-number" id="coalLoose">0</div></div>
             </div>
             <div class="footer-note">
-                💡 Tip: Toggle "Supplier Mode" to auto-apply discount. Only one yellow field at a time.
+                💡 Tip: Toggle "Supplier Mode" to apply discount to gold budget inputs. Only one yellow field at a time.
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Settings state
+    // Settings matching your Excel exactly
     let settings = {
         currentStock: 0,
         regularUnitPrice: 150,
         supplierDiscount: 0.1,
-        smallStackSize: 16,
-        fullStackSize: 32,
-        coalStackSize: 64
+        smallStackSize: 16,    // 16-stack
+        fullStackSize: 32,      // 32-stack (used as "64-stack" reference in silver)
+        coalStackSize: 64       // 64-stack for coal
     };
     let supplierActive = false;
 
@@ -479,12 +459,6 @@
         coalStacks64: document.getElementById('coalStacks64'),
         coalOreToGive: document.getElementById('coalOreToGive')
     };
-
-    function clearAllInputsExcept(keepId = null) {
-        for (let [key, elem] of Object.entries(inputs)) {
-            if (elem && keepId !== elem.id) elem.value = '';
-        }
-    }
 
     function recompute() {
         let activeField = null;
@@ -511,30 +485,50 @@
             return;
         }
 
-        const small = settings.smallStackSize;
-        const full = settings.fullStackSize;
-        const coalSize = settings.coalStackSize;
+        const small = settings.smallStackSize;      // 16
+        const full = settings.fullStackSize;        // 32
+        const coalSize = settings.coalStackSize;    // 64
         const regPrice = settings.regularUnitPrice;
         const suppPrice = supplierUnitPrice();
         const stockVal = settings.currentStock;
         
         let silverOre = null;
         
+        // Conversion logic matching your Excel formulas
         switch (activeField) {
-            case 'silverOreWanted': silverOre = activeValue; break;
-            case 'silverStacks16': silverOre = activeValue * small; break;
-            case 'silverStacks32': silverOre = activeValue * full; break;
-            case 'goldBudgetRegular': silverOre = (regPrice === 0 ? 0 : Math.floor(activeValue / regPrice)); break;
-            case 'goldBudgetSupplier': silverOre = (suppPrice === 0 ? 0 : Math.floor(activeValue / suppPrice)); break;
-            case 'coalStacks64': silverOre = activeValue * full / coalSize; break;
-            case 'coalOreToGive': silverOre = activeValue / coalSize; break;
-            default: silverOre = 0;
+            case 'silverOreWanted':
+                silverOre = activeValue;
+                break;
+            case 'silverStacks16':
+                silverOre = activeValue * small;
+                break;
+            case 'silverStacks32':
+                silverOre = activeValue * full;
+                break;
+            case 'goldBudgetRegular':
+                silverOre = (regPrice === 0 ? 0 : Math.floor(activeValue / regPrice));
+                break;
+            case 'goldBudgetSupplier':
+                silverOre = (suppPrice === 0 ? 0 : Math.floor(activeValue / suppPrice));
+                break;
+            case 'coalStacks64':
+                // Coal stacks of 64 to give -> silver ore = (coalStacks64 * 32) / 64
+                silverOre = Math.floor(activeValue * full / coalSize);
+                break;
+            case 'coalOreToGive':
+                // Coal ore to give -> silver ore = coalOre / 64
+                silverOre = Math.floor(activeValue / coalSize);
+                break;
+            default:
+                silverOre = 0;
         }
+        
         if (silverOre === null || isNaN(silverOre)) silverOre = 0;
         silverOre = Math.floor(silverOre);
         
         document.getElementById('statusMessage').innerHTML = `✅ Active: ${activeField} = ${activeValue} → ${silverOre} silver ore`;
         
+        // Calculate all results
         const silver16Eq = silverOre / small;
         const silver32Eq = silverOre / full;
         const goldRegular = silverOre * regPrice;
@@ -545,6 +539,7 @@
         const remainingStock = stockVal - silverOre;
         const enough = (stockVal >= silverOre) ? 'YES ✓' : 'NO ✗';
         
+        // Update live results
         document.getElementById('silverToGive').innerText = silverOre.toLocaleString();
         document.getElementById('silverStacks16Result').innerText = silver16Eq.toFixed(2);
         document.getElementById('silverStacks32Result').innerText = silver32Eq.toFixed(2);
@@ -557,7 +552,9 @@
         document.getElementById('enoughStock').innerHTML = enough;
         document.getElementById('detectedInputDesc').innerHTML = `${activeField} = ${activeValue}`;
         
-        const silverFull64Stacks = Math.floor(silverOre / full);
+        // SILVER BREAKDOWN - Using 32 as "64-stack" reference (matching Excel)
+        // In Excel: Full 64-stacks = INT(silverOre / 32) because 64-stacks hold 32 ore each
+        const silverFull64Stacks = Math.floor(silverOre / full);  // full = 32
         const silverRemAfter64 = silverOre % full;
         const silverFull16 = Math.floor(silverRemAfter64 / small);
         const silverLooseFinal = silverRemAfter64 % small;
@@ -567,6 +564,7 @@
         document.getElementById('silverFull16').innerText = silverFull16;
         document.getElementById('silverLoose').innerText = silverLooseFinal;
         
+        // COAL BREAKDOWN - Using actual 64-size stacks
         const coalOreInt = Math.floor(coalOreGiven);
         const coalFullStacks = Math.floor(coalOreInt / coalSize);
         const coalRemainderOre = coalOreInt % coalSize;
@@ -590,6 +588,7 @@
                 if (elem.value.trim() === '') return;
                 const num = parseFloat(elem.value);
                 if (isNaN(num)) return;
+                // Clear all other inputs
                 for (let [ok, other] of Object.entries(inputs)) {
                     if (other !== elem) other.value = '';
                 }
