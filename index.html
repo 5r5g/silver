@@ -38,11 +38,69 @@
             margin: 0;
             padding: 20px;
             color: var(--text);
-            transition: filter 0.7s ease, background 0.7s ease, color 0.7s ease;
+            transition: background 0.7s ease, color 0.7s ease;
         }
 
         body.supplier-mode {
-            filter: invert(1) hue-rotate(180deg);
+            --bg: #c99835;
+            --card-bg: #f4d88fcc;
+            --card-border: #7a5417;
+            --card-hover: #5d3f10;
+            --text: #241704;
+            --muted: #46300d;
+            --label: #2c1d06;
+            --soft-label: #4b320b;
+            --accent: #4a2c05;
+            --accent-bright: #1f1202;
+            --accent-soft: #1f1202;
+            --input-bg: #fff0bf;
+            --input-focus-bg: #fff7d8;
+            --panel-bg: #f1cf75;
+            --result-bg: #ffe9a6;
+            --breakdown-bg: #efc766;
+            --breakdown-title-bg: #7c5518;
+            --warning-bg: #f8df9d;
+            --footer-bg: #f1cf75cc;
+            --shadow: rgba(74, 44, 5, 0.28);
+        }
+
+        body.supplier-mode .tool-header h1 {
+            background: linear-gradient(135deg, #ffe7a0, #d9a83e);
+            color: #241704;
+            border-color: #7a5417;
+        }
+
+        body.supplier-mode .sub,
+        body.supplier-mode .quick-settings,
+        body.supplier-mode .toggle-wrapper {
+            background: #f1cf75cc;
+            border-color: #7a5417;
+        }
+
+        body.supplier-mode .card h2,
+        body.supplier-mode .card h3,
+        body.supplier-mode .breakdown-number,
+        body.supplier-mode .yellow-input {
+            color: #241704;
+        }
+
+        body.supplier-mode .breakdown-title {
+            color: #fff1c0;
+        }
+
+        body.supplier-mode .live-number {
+            color: #241704;
+            border-color: #7a5417;
+        }
+
+        body.supplier-mode .icon-btn {
+            background: #7c5518;
+            color: #fff1c0;
+        }
+
+        body.supplier-mode .icon-btn:hover {
+            background: #4a2c05;
+            color: #fff7d8;
         }
 
         .main-container {
@@ -476,7 +534,7 @@
             </div>
 
             <div class="footer-note">
-                💡 Tip: Supplier Mode applies the 10% discount to gold-budget calculations and smoothly inverts the calculator colors.
+                💡 Tip: Supplier Mode applies the 10% discount to gold-budget calculations and smoothly changes the calculator into a gold theme.
                 Silver breaks into 32-stacks, then 16-stacks, then loose ore. Coal breaks into 64-stacks, then 16-stacks, then loose ore.
             </div>
         </div>
