@@ -84,8 +84,14 @@
             color: #241704;
         }
 
-        body.supplier-mode .breakdown-title {
+        body.supplier-mode .breakdown-title,
+        body.supplier-mode .breakdown-group-title {
             color: #fff1c0;
+        }
+
+        body.supplier-mode .breakdown-group {
+            background: linear-gradient(135deg, #efc766, #f6da8a);
+            border-color: #7a5417;
         }
 
         body.supplier-mode .live-number {
@@ -274,19 +280,39 @@
         }
 
         .breakdown-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.9rem;
+            margin-top: 0.65rem;
+        }
+
+        .breakdown-group {
+            background: linear-gradient(135deg, var(--breakdown-bg), #111d25);
+            border: 1px solid #24343c;
+            border-radius: 24px;
+            padding: 12px;
+            transition: all 0.7s ease;
+        }
+
+        .breakdown-group-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-soft);
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .breakdown-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
 
         .breakdown-box {
-            background: var(--breakdown-bg);
-            padding: 8px 8px;
-            border-radius: 20px;
-            flex: 1;
-            min-width: 100px;
+            background: var(--result-bg);
+            padding: 9px 8px;
+            border-radius: 18px;
             text-align: center;
             border: 1px solid #24343c;
             transition: all 0.7s ease;
@@ -519,23 +545,37 @@
 
             <h3>🔨 Silver Breakdown</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Full 32-stacks</span><div class="breakdown-number" id="silverFull32">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder after 32s</span><div class="breakdown-number" id="silverRem32">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks from remainder</span><div class="breakdown-number" id="silverFull16">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose ore after 16s</span><div class="breakdown-number" id="silverLoose">0</div></div>
+                <div class="breakdown-group">
+                    <div class="breakdown-group-title">32-stack conversion</div>
+                    <div class="breakdown-pair">
+                        <div class="breakdown-box"><span class="breakdown-title">Full 32-stacks</span><div class="breakdown-number" id="silverFull32">0</div></div>
+                        <div class="breakdown-box"><span class="breakdown-title">Remainder after 32s</span><div class="breakdown-number" id="silverRem32">0</div></div>
+                    </div>
+                </div>
+
+                <div class="breakdown-group">
+                    <div class="breakdown-group-title">16-stack conversion</div>
+                    <div class="breakdown-pair">
+                        <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks</span><div class="breakdown-number" id="silverFull16">0</div></div>
+                        <div class="breakdown-box"><span class="breakdown-title">Remainder after 16s</span><div class="breakdown-number" id="silverRem16">0</div></div>
+                    </div>
+                </div>
             </div>
 
             <h3>🪨 Coal Breakdown</h3>
             <div class="breakdown-grid">
-                <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks</span><div class="breakdown-number" id="coalFull64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Remainder after 64s</span><div class="breakdown-number" id="coalRem64">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Full 16-stacks from remainder</span><div class="breakdown-number" id="coalFull16">0</div></div>
-                <div class="breakdown-box"><span class="breakdown-title">Loose ore after 16s</span><div class="breakdown-number" id="coalLoose">0</div></div>
+                <div class="breakdown-group">
+                    <div class="breakdown-group-title">64-stack conversion</div>
+                    <div class="breakdown-pair">
+                        <div class="breakdown-box"><span class="breakdown-title">Full 64-stacks</span><div class="breakdown-number" id="coalFull64">0</div></div>
+                        <div class="breakdown-box"><span class="breakdown-title">Remainder after 64s</span><div class="breakdown-number" id="coalRem64">0</div></div>
+                    </div>
+                </div>
             </div>
 
             <div class="footer-note">
                 💡 Tip: Supplier Mode applies the 10% discount to gold-budget calculations and smoothly changes the calculator into a gold theme.
-                Silver breaks into 32-stacks, then 16-stacks, then loose ore. Coal breaks into 64-stacks, then 16-stacks, then loose ore.
+                Silver shows both 32-stack and 16-stack conversions. Coal shows only 64-stack conversion.
             </div>
         </div>
     </div>
@@ -651,28 +691,26 @@
 
     function updateSilverBreakdown(oreAmount) {
         const ore = Math.floor(Math.max(0, oreAmount));
+
         const full32Stacks = Math.floor(ore / settings.fullStackSize);
         const remainderAfter32 = ore % settings.fullStackSize;
-        const full16Stacks = Math.floor(remainderAfter32 / settings.smallStackSize);
-        const looseOre = remainderAfter32 % settings.smallStackSize;
+
+        const full16Stacks = Math.floor(ore / settings.smallStackSize);
+        const remainderAfter16 = ore % settings.smallStackSize;
 
         document.getElementById('silverFull32').innerText = formatNumber(full32Stacks);
         document.getElementById('silverRem32').innerText = formatNumber(remainderAfter32);
         document.getElementById('silverFull16').innerText = formatNumber(full16Stacks);
-        document.getElementById('silverLoose').innerText = formatNumber(looseOre);
+        document.getElementById('silverRem16').innerText = formatNumber(remainderAfter16);
     }
 
     function updateCoalBreakdown(oreAmount) {
         const ore = Math.floor(Math.max(0, oreAmount));
         const full64Stacks = Math.floor(ore / settings.coalStackSize);
         const remainderAfter64 = ore % settings.coalStackSize;
-        const full16Stacks = Math.floor(remainderAfter64 / settings.smallStackSize);
-        const looseOre = remainderAfter64 % settings.smallStackSize;
 
         document.getElementById('coalFull64').innerText = formatNumber(full64Stacks);
         document.getElementById('coalRem64').innerText = formatNumber(remainderAfter64);
-        document.getElementById('coalFull16').innerText = formatNumber(full16Stacks);
-        document.getElementById('coalLoose').innerText = formatNumber(looseOre);
     }
 
     function recompute() {
@@ -735,11 +773,9 @@
             'silverFull32',
             'silverRem32',
             'silverFull16',
-            'silverLoose',
+            'silverRem16',
             'coalFull64',
-            'coalRem64',
-            'coalFull16',
-            'coalLoose'
+            'coalRem64'
         ];
 
         ids.forEach(id => {
