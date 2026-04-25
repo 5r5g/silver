@@ -7,7 +7,7 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, monospace;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
         }
 
         :root {
@@ -33,14 +33,6 @@
             --shadow: rgba(0, 0, 0, 0.4);
         }
 
-        body {
-            background: var(--bg);
-            margin: 0;
-            padding: 20px;
-            color: var(--text);
-            transition: background 0.7s ease, color 0.7s ease;
-        }
-
         body.supplier-mode {
             --bg: #c99835;
             --card-bg: #f4d88fcc;
@@ -64,49 +56,12 @@
             --shadow: rgba(74, 44, 5, 0.28);
         }
 
-        body.supplier-mode .tool-header h1 {
-            background: linear-gradient(135deg, #ffe7a0, #d9a83e);
-            color: #241704;
-            border-color: #7a5417;
-        }
-
-        body.supplier-mode .sub,
-        body.supplier-mode .quick-settings,
-        body.supplier-mode .toggle-wrapper {
-            background: #f1cf75cc;
-            border-color: #7a5417;
-        }
-
-        body.supplier-mode .card h2,
-        body.supplier-mode .card h3,
-        body.supplier-mode .breakdown-number,
-        body.supplier-mode .yellow-input {
-            color: #241704;
-        }
-
-        body.supplier-mode .breakdown-title,
-        body.supplier-mode .breakdown-group-title {
-            color: #fff1c0;
-        }
-
-        body.supplier-mode .breakdown-group {
-            background: linear-gradient(135deg, #efc766, #f6da8a);
-            border-color: #7a5417;
-        }
-
-        body.supplier-mode .live-number {
-            color: #241704;
-            border-color: #7a5417;
-        }
-
-        body.supplier-mode .icon-btn {
-            background: #7c5518;
-            color: #fff1c0;
-        }
-
-        body.supplier-mode .icon-btn:hover {
-            background: #4a2c05;
-            color: #fff7d8;
+        body {
+            background: var(--bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--text);
+            transition: background 0.7s ease, color 0.7s ease;
         }
 
         .main-container {
@@ -128,13 +83,19 @@
             padding: 10px 28px;
             border-radius: 80px;
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
             color: var(--accent-soft);
             border: 1px solid #2d3e3e;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
             margin: 0 0 10px 0;
             transition: all 0.7s ease;
+        }
+
+        body.supplier-mode .tool-header h1 {
+            background: linear-gradient(135deg, #ffe7a0, #d9a83e);
+            color: #241704;
+            border-color: #7a5417;
         }
 
         .sub {
@@ -147,6 +108,13 @@
             border: 1px solid #2c423f;
             display: inline-block;
             transition: all 0.7s ease;
+        }
+
+        body.supplier-mode .sub,
+        body.supplier-mode .quick-settings,
+        body.supplier-mode .toggle-wrapper {
+            background: #f1cf75cc;
+            border-color: #7a5417;
         }
 
         .grid-2col {
@@ -174,20 +142,20 @@
 
         .card h2 {
             font-size: 1.35rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 0;
             margin-bottom: 1rem;
             border-left: 4px solid var(--accent);
             padding-left: 14px;
-            color: #f2e5c2;
+            color: var(--accent-soft);
             transition: all 0.7s ease;
         }
 
         .card h3 {
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 700;
             margin: 1.2rem 0 0.6rem 0;
-            color: #cfdde6;
+            color: var(--label);
             border-bottom: 1px dashed #2c3f46;
             padding-bottom: 5px;
             transition: all 0.7s ease;
@@ -208,7 +176,7 @@
         }
 
         .input-group label {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--label);
             font-size: 0.8rem;
             flex: 1;
@@ -222,13 +190,16 @@
             border-radius: 48px;
             padding: 6px 12px;
             width: 130px;
-            font-weight: 500;
+            font-weight: 700;
             text-align: center;
             font-size: 0.85rem;
             outline: none;
-            font-family: monospace;
             color: #f7eac5;
             transition: all 0.25s ease;
+        }
+
+        body.supplier-mode .yellow-input {
+            color: #241704;
         }
 
         .yellow-input:focus {
@@ -248,7 +219,7 @@
         }
 
         .live-label {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--soft-label);
             font-size: 0.8rem;
             flex: 1;
@@ -256,8 +227,7 @@
         }
 
         .live-number {
-            font-weight: 700;
-            font-family: monospace;
+            font-weight: 800;
             background: var(--result-bg);
             padding: 3px 10px;
             border-radius: 40px;
@@ -269,6 +239,11 @@
             transition: all 0.7s ease;
         }
 
+        body.supplier-mode .live-number {
+            color: #241704;
+            border-color: #7a5417;
+        }
+
         .stock-warning {
             background: var(--warning-bg);
             border-left: 3px solid var(--accent);
@@ -276,67 +251,6 @@
             border-radius: 20px;
             margin-top: 14px;
             font-size: 0.8rem;
-            transition: all 0.7s ease;
-        }
-
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.9rem;
-            margin-top: 0.65rem;
-        }
-
-        .breakdown-group {
-            background: linear-gradient(135deg, var(--breakdown-bg), #111d25);
-            border: 1px solid #24343c;
-            border-radius: 24px;
-            padding: 12px;
-            transition: all 0.7s ease;
-        }
-
-        .breakdown-group-title {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--accent-soft);
-            margin-bottom: 8px;
-            text-align: center;
-            letter-spacing: 0.3px;
-        }
-
-        .breakdown-pair {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .breakdown-box {
-            background: var(--result-bg);
-            padding: 9px 8px;
-            border-radius: 18px;
-            text-align: center;
-            border: 1px solid #24343c;
-            transition: all 0.7s ease;
-        }
-
-        .breakdown-title {
-            font-weight: 600;
-            background: var(--breakdown-title-bg);
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 50px;
-            font-size: 0.65rem;
-            color: #cbd5e1;
-            margin-bottom: 6px;
-            transition: all 0.7s ease;
-        }
-
-        .breakdown-number {
-            font-size: 1.2rem;
-            font-weight: 700;
-            font-family: monospace;
-            color: #e9d9a7;
-            display: block;
-            margin-top: 4px;
             transition: all 0.7s ease;
         }
 
@@ -364,20 +278,8 @@
         }
 
         .settings-row span:last-child {
-            font-family: monospace;
-            font-weight: 600;
+            font-weight: 800;
             color: var(--accent-soft);
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.68rem;
-            color: #8499a6;
-            background: var(--footer-bg);
-            padding: 10px;
-            border-radius: 28px;
-            margin-top: 20px;
-            transition: all 0.7s ease;
         }
 
         .toggle-wrapper {
@@ -393,7 +295,7 @@
         }
 
         .toggle-label {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.8rem;
             color: var(--label);
             display: flex;
@@ -466,6 +368,100 @@
             color: var(--accent-bright);
         }
 
+        body.supplier-mode .icon-btn {
+            background: #7c5518;
+            color: #fff1c0;
+        }
+
+        body.supplier-mode .icon-btn:hover {
+            background: #4a2c05;
+            color: #fff7d8;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.9rem;
+            margin-top: 0.65rem;
+        }
+
+        .breakdown-group {
+            background: linear-gradient(135deg, var(--breakdown-bg), #111d25);
+            border: 1px solid #24343c;
+            border-radius: 24px;
+            padding: 12px;
+            transition: all 0.7s ease;
+        }
+
+        body.supplier-mode .breakdown-group {
+            background: linear-gradient(135deg, #efc766, #f6da8a);
+            border-color: #7a5417;
+        }
+
+        .breakdown-group-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--accent-soft);
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .breakdown-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .breakdown-box {
+            background: var(--result-bg);
+            padding: 9px 8px;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid #24343c;
+            transition: all 0.7s ease;
+        }
+
+        .breakdown-title {
+            font-weight: 700;
+            background: var(--breakdown-title-bg);
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            transition: all 0.7s ease;
+        }
+
+        body.supplier-mode .breakdown-title {
+            color: #fff1c0;
+        }
+
+        .breakdown-number {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #e9d9a7;
+            display: block;
+            margin-top: 4px;
+            transition: all 0.7s ease;
+        }
+
+        body.supplier-mode .breakdown-number {
+            color: #241704;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.68rem;
+            color: #8499a6;
+            background: var(--footer-bg);
+            padding: 10px;
+            border-radius: 28px;
+            margin-top: 20px;
+            transition: all 0.7s ease;
+        }
+
         @media (max-width: 780px) {
             .card {
                 padding: 1rem;
@@ -498,6 +494,7 @@
     <div class="grid-2col">
         <div class="card">
             <h2>📦 Input One Value</h2>
+
             <div id="input-zone">
                 <div class="input-group"><label>🪙 Silver ore wanted</label><input type="number" id="silverOreWanted" class="yellow-input" step="1" min="0" placeholder="amount"></div>
                 <div class="input-group"><label>📦 Silver stacks of 16 wanted</label><input type="number" id="silverStacks16" class="yellow-input" step="1" min="0" placeholder="stacks"></div>
@@ -530,6 +527,7 @@
 
         <div class="card">
             <h2>📊 Live Exchange</h2>
+
             <div id="liveResults">
                 <div class="live-row"><span class="live-label">🪙 Silver ore to give:</span> <span id="silverToGive" class="live-number">—</span></div>
                 <div class="live-row"><span class="live-label">📦 Silver stacks of 16:</span> <span id="silverStacks16Result" class="live-number">—</span></div>
@@ -574,8 +572,7 @@
             </div>
 
             <div class="footer-note">
-                💡 Tip: Supplier Mode applies the 10% discount to gold-budget calculations and smoothly changes the calculator into a gold theme.
-                Silver shows both 32-stack and 16-stack conversions. Coal shows only 64-stack conversion.
+                💡 Supplier Mode applies the 10% discount to gold-budget calculations and smoothly changes the calculator into a gold theme. Silver shows both 32-stack and 16-stack conversions. Coal shows only 64-stack conversion.
             </div>
         </div>
     </div>
@@ -588,7 +585,6 @@
         supplierDiscount: 0.1,
         smallStackSize: 16,
         fullStackSize: 32,
-        silverLargeStackSize: 32,
         coalStackSize: 64
     };
 
@@ -613,9 +609,10 @@
     };
 
     function activeUnitPrice() {
-        return supplierActive
-            ? settings.regularUnitPrice * (1 - settings.supplierDiscount)
-            : settings.regularUnitPrice;
+        if (supplierActive) {
+            return settings.regularUnitPrice * (1 - settings.supplierDiscount);
+        }
+        return settings.regularUnitPrice;
     }
 
     function formatNumber(value, decimals = 0) {
@@ -628,25 +625,27 @@
 
     function formatStackValue(value) {
         if (!isFinite(value)) return '0';
-        return Number.isInteger(value) ? formatNumber(value) : formatNumber(value, 2);
+        const rounded = Math.round(value * 100) / 100;
+        return Number.isInteger(rounded) ? formatNumber(rounded) : formatNumber(rounded, 2);
     }
 
-    function getActiveInput() {
+    function readActiveInput() {
         let activeField = null;
         let activeValue = null;
 
         for (const [key, elem] of Object.entries(inputs)) {
-            if (!elem || elem.value.trim() === '') continue;
+            const rawValue = elem.value.trim();
+            if (rawValue === '') continue;
 
-            const num = parseFloat(elem.value);
-            if (isNaN(num) || !isFinite(num)) continue;
+            const numericValue = Number(rawValue);
+            if (!Number.isFinite(numericValue)) continue;
 
             if (activeField !== null) {
                 return { error: 'Only one yellow box can be used at a time. Clear the others.' };
             }
 
             activeField = key;
-            activeValue = Math.max(0, num);
+            activeValue = Math.max(0, numericValue);
         }
 
         if (activeField === null) {
@@ -656,41 +655,45 @@
         return { activeField, activeValue };
     }
 
-    function convertInputToSilverOre(activeField, activeValue) {
-        const small = settings.smallStackSize;
-        const full = settings.fullStackSize;
-        const coalSize = settings.coalStackSize;
-        const price = activeUnitPrice();
+    function silverFromInput(activeField, activeValue) {
+        const unitPrice = activeUnitPrice();
+        const value = Math.floor(Math.max(0, activeValue));
 
         switch (activeField) {
             case 'silverOreWanted':
-                return activeValue;
+                // Raw silver ore amount.
+                return value;
 
             case 'silverStacks16':
-                return activeValue * small;
+                // Number of 16-stacks wanted.
+                // Example: 1 = 16 silver ore, 2 = 32 silver ore.
+                return value * settings.smallStackSize;
 
             case 'silverStacks32':
-                return activeValue * full;
+                // Number of 32-stacks wanted.
+                // Example: 1 = 32 silver ore, 2 = 64 silver ore.
+                return value * settings.fullStackSize;
 
             case 'goldBudget':
-                return price === 0 ? 0 : Math.floor(activeValue / price);
+                // Gold budget converts into however many silver ore can be bought.
+                return unitPrice <= 0 ? 0 : Math.floor(value / unitPrice);
 
             case 'coalStacks64':
-                // User enters coal stacks of 64.
-                // 1 coal stack = 64 coal ore, which matches 64 silver ore.
-                return activeValue * coalSize;
+                // Number of 64-stacks of coal.
+                // Since silver and coal are matched 1:1, 1 coal stack = 64 silver ore.
+                return value * settings.coalStackSize;
 
             case 'coalOreToGive':
-                // Raw coal ore matches silver ore 1:1.
-                return activeValue;
+                // Raw coal ore matches raw silver ore 1:1.
+                return value;
 
             default:
                 return 0;
         }
     }
 
-    function updateSilverBreakdown(oreAmount) {
-        const ore = Math.floor(Math.max(0, oreAmount));
+    function updateSilverBreakdown(silverOre) {
+        const ore = Math.floor(Math.max(0, silverOre));
 
         const full32Stacks = Math.floor(ore / settings.fullStackSize);
         const remainderAfter32 = ore % settings.fullStackSize;
@@ -704,8 +707,8 @@
         document.getElementById('silverRem16').innerText = formatNumber(remainderAfter16);
     }
 
-    function updateCoalBreakdown(oreAmount) {
-        const ore = Math.floor(Math.max(0, oreAmount));
+    function updateCoalBreakdown(coalOre) {
+        const ore = Math.floor(Math.max(0, coalOre));
         const full64Stacks = Math.floor(ore / settings.coalStackSize);
         const remainderAfter64 = ore % settings.coalStackSize;
 
@@ -713,53 +716,8 @@
         document.getElementById('coalRem64').innerText = formatNumber(remainderAfter64);
     }
 
-    function recompute() {
-        const active = getActiveInput();
-
-        if (active.error) {
-            document.getElementById('statusMessage').innerHTML = `⚠️ ${active.error}`;
-            clearResultsOnError();
-            return;
-        }
-
-        const { activeField, activeValue } = active;
-        const small = settings.smallStackSize;
-        const full = settings.fullStackSize;
-        const coalSize = settings.coalStackSize;
-        const price = activeUnitPrice();
-        const stockVal = settings.currentStock;
-
-        let silverOre = convertInputToSilverOre(activeField, activeValue);
-        silverOre = Math.floor(Math.max(0, silverOre));
-
-        const silver16Eq = silverOre / small;
-        const silver32Eq = silverOre / full;
-        const goldPrice = silverOre * price;
-        const coalOreGiven = silverOre;
-        const coalStacksGiven = coalOreGiven / coalSize;
-        const totalSilverCoal = silverOre + coalOreGiven;
-        const remainingStock = stockVal - silverOre;
-        const enough = stockVal >= silverOre ? 'YES ✓' : 'NO ✗';
-        const modeText = supplierActive ? 'Supplier price' : 'Regular price';
-
-        document.getElementById('statusMessage').innerHTML = `✅ Active: ${inputLabels[activeField]} = ${formatStackValue(activeValue)} → ${formatNumber(silverOre)} silver ore`;
-        document.getElementById('silverToGive').innerText = formatNumber(silverOre);
-        document.getElementById('silverStacks16Result').innerText = formatStackValue(silver16Eq);
-        document.getElementById('silverStacks32Result').innerText = formatStackValue(silver32Eq);
-        document.getElementById('goldPrice').innerHTML = `${formatNumber(Math.floor(goldPrice))} gold (${modeText})`;
-        document.getElementById('coalOreResult').innerHTML = formatNumber(coalOreGiven);
-        document.getElementById('coalStacks64Result').innerHTML = `${formatStackValue(coalStacksGiven)} stacks`;
-        document.getElementById('totalSilverCoal').innerHTML = formatNumber(totalSilverCoal);
-        document.getElementById('silverRemaining').innerHTML = formatNumber(remainingStock);
-        document.getElementById('enoughStock').innerHTML = enough;
-        document.getElementById('detectedInputDesc').innerHTML = `${inputLabels[activeField]} = ${formatStackValue(activeValue)}`;
-
-        updateSilverBreakdown(silverOre);
-        updateCoalBreakdown(coalOreGiven);
-    }
-
-    function clearResultsOnError() {
-        const ids = [
+    function clearResults() {
+        const resultIds = [
             'silverToGive',
             'silverStacks16Result',
             'silverStacks32Result',
@@ -778,23 +736,69 @@
             'coalRem64'
         ];
 
-        ids.forEach(id => {
+        resultIds.forEach(id => {
             const el = document.getElementById(id);
             if (el) el.innerText = '—';
         });
     }
 
+    function recompute() {
+        const activeInput = readActiveInput();
+
+        if (activeInput.error) {
+            document.getElementById('statusMessage').innerHTML = `⚠️ ${activeInput.error}`;
+            clearResults();
+            return;
+        }
+
+        const { activeField, activeValue } = activeInput;
+        const unitPrice = activeUnitPrice();
+
+        // STEP 1: Normalize every possible input into one raw silver ore value.
+        const silverOre = Math.floor(Math.max(0, silverFromInput(activeField, activeValue)));
+
+        // STEP 2: Coal matches silver 1:1.
+        // Example: 64 silver ore = 64 coal ore = 1 coal stack of 64.
+        const coalOre = silverOre;
+
+        // STEP 3: Everything displayed below is calculated from the normalized values above.
+        const silverStacks16 = silverOre / settings.smallStackSize;
+        const silverStacks32 = silverOre / settings.fullStackSize;
+        const coalStacks64 = coalOre / settings.coalStackSize;
+        const goldPrice = Math.floor(silverOre * unitPrice);
+        const totalSilverAndCoal = silverOre + coalOre;
+        const silverRemaining = settings.currentStock - silverOre;
+        const enoughStock = settings.currentStock >= silverOre ? 'YES ✓' : 'NO ✗';
+        const priceMode = supplierActive ? 'supplier price' : 'regular price';
+
+        document.getElementById('statusMessage').innerHTML = `✅ Active: ${inputLabels[activeField]} = ${formatStackValue(activeValue)} → ${formatNumber(silverOre)} silver ore`;
+        document.getElementById('silverToGive').innerText = formatNumber(silverOre);
+        document.getElementById('silverStacks16Result').innerText = `${formatStackValue(silverStacks16)} stacks`;
+        document.getElementById('silverStacks32Result').innerText = `${formatStackValue(silverStacks32)} stacks`;
+        document.getElementById('goldPrice').innerText = `${formatNumber(goldPrice)} gold (${priceMode})`;
+        document.getElementById('coalOreResult').innerText = formatNumber(coalOre);
+        document.getElementById('coalStacks64Result').innerText = `${formatStackValue(coalStacks64)} stacks`;
+        document.getElementById('totalSilverCoal').innerText = formatNumber(totalSilverAndCoal);
+        document.getElementById('silverRemaining').innerText = formatNumber(silverRemaining);
+        document.getElementById('enoughStock').innerText = enoughStock;
+        document.getElementById('detectedInputDesc').innerText = `${inputLabels[activeField]} = ${formatStackValue(activeValue)}`;
+
+        updateSilverBreakdown(silverOre);
+        updateCoalBreakdown(coalOre);
+    }
+
     function attachHandlers() {
-        for (const elem of Object.values(inputs)) {
-            elem.addEventListener('input', function () {
-                if (elem.value.trim() !== '') {
-                    for (const other of Object.values(inputs)) {
-                        if (other !== elem) other.value = '';
-                    }
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', function () {
+                if (input.value.trim() !== '') {
+                    Object.values(inputs).forEach(otherInput => {
+                        if (otherInput !== input) otherInput.value = '';
+                    });
                 }
+
                 recompute();
             });
-        }
+        });
     }
 
     function updateSettingsDisplay() {
@@ -808,33 +812,33 @@
     }
 
     window.editStock = function () {
-        const val = prompt('Silver ore stock:', settings.currentStock);
-        if (val !== null && !isNaN(parseFloat(val))) {
-            settings.currentStock = Math.max(0, parseFloat(val));
+        const value = prompt('Silver ore stock:', settings.currentStock);
+        if (value !== null && !isNaN(Number(value))) {
+            settings.currentStock = Math.max(0, Number(value));
             updateSettingsDisplay();
         }
     };
 
     window.editUnitPrice = function () {
-        const val = prompt('Regular unit price in gold per silver ore:', settings.regularUnitPrice);
-        if (val !== null && !isNaN(parseFloat(val))) {
-            settings.regularUnitPrice = Math.max(0, parseFloat(val));
+        const value = prompt('Regular unit price in gold per silver ore:', settings.regularUnitPrice);
+        if (value !== null && !isNaN(Number(value))) {
+            settings.regularUnitPrice = Math.max(0, Number(value));
             updateSettingsDisplay();
         }
     };
 
     window.editDiscount = function () {
-        const val = prompt('Supplier discount as a decimal. Example: 0.1 = 10%', settings.supplierDiscount);
-        if (val !== null && !isNaN(parseFloat(val))) {
-            settings.supplierDiscount = Math.min(1, Math.max(0, parseFloat(val)));
+        const value = prompt('Supplier discount as a decimal. Example: 0.1 = 10%', settings.supplierDiscount);
+        if (value !== null && !isNaN(Number(value))) {
+            settings.supplierDiscount = Math.min(1, Math.max(0, Number(value)));
             updateSettingsDisplay();
         }
     };
 
     const supplierToggle = document.getElementById('supplierToggle');
 
-    supplierToggle.addEventListener('change', function (e) {
-        supplierActive = e.target.checked;
+    supplierToggle.addEventListener('change', function () {
+        supplierActive = supplierToggle.checked;
         document.body.classList.toggle('supplier-mode', supplierActive);
         updateSettingsDisplay();
     });
@@ -842,6 +846,7 @@
     function init() {
         attachHandlers();
         supplierToggle.checked = false;
+        supplierActive = false;
         document.body.classList.remove('supplier-mode');
         updateSettingsDisplay();
     }
